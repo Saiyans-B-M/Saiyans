@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+{% include 'includes/team_nav_empty.html' %}
+<br>
+<div class="container">
+	<form method="POST" class="black_bg shadow-style" enctype="multipart/form-data">
+		{% csrf_token %}
+		{% include 'includes/form.html' %}
+
+		<button type="submit" class="btn btn-dark">Update</button>
+	</form>
+</div>
+{% endblock %}

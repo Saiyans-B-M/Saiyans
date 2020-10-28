@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+	{% include 'includes/navbar.html' %}
+	<h2>Join Us</h2>
+	<p>Saiyans provide platform for the fresher graduates, whose passion is to break convictions to explore things. Those who want to work along with them can apply to join their team, called Team Saiyans. We welcome ui designers, all kind of developers, marketing salesman, etc...
+	Enrollment hadn't started yet,,, once we start it everyone can apply to join team using the form we provide......</p>
+
+	<div class="container w-50 black_bg shadow-style text-white">
+	<h3> Application Form</h3>
+	<form method="POST">
+		{% include 'includes/form.html' %}
+		{% csrf_token %}
+		<button type="submit" class="btn btn-dark">Apply</button><br>
+		<small>we will contact you soon... </small>
+	</form>
+	</div>
+	<br>
+	
+{% endblock %}

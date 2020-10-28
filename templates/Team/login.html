@@ -1,0 +1,39 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include 'includes/team_nav.html' %}
+  <br>
+  <div class="container text-white">
+    <!-- <h1 class="text-center logo my-4">
+      <a href="{% url 'home_page' %}" style="color: #000000;">Team Saiyan</a>
+    </h1> -->
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-md-6 col-sm-8">
+        <div class="card black_bg shadow-style">
+          <div class="card-body">
+            <h3 class="card-title">Log in</h3>
+            <form class="shadow-style black_bg" method="post">
+              {% csrf_token %}
+              {% include 'includes/form.html' %}
+              <button type="submit" class="btn btn-secondary btn-block">Log in</button>
+            </form>
+          </div>
+          <div class="card-footer text-muted text-center">
+            Not a member? Wanna join us? <a href="{% url 'join_us' %}" class="btn-secondary">Join Us</a>
+          </div>
+        </div>
+        <div class="text-center py-2">
+          <small>
+            <a href="{% url 'password_reset' %}" class="text-muted">Forgot your password?</a>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,226 @@
+{% extends 'blog/base.html' %}
+
+{% load form_tags widget_tweaks %}
+
+{% block content %}
+{% include 'includes/team_nav.html' %}
+
+<!-- start of Profile View -->
+<br><div class="container shadow-style ">
+
+
+	         <h3 class="black_bg shadow-style">Your Profile</h3> <a href="{% url 'edit_profile' %}" class="btn btn-dark">edit</a>
+
+          <div><img src="{{profile.pro_pic.url}}" class="pro-img-style"></div>
+
+          <div>
+  
+          	<p>User       :    <b>{{user}}</b></p>
+            <p>Position   :    <b>{{profile.position}}</b></p>
+            <p>Full Name  :    <b>{{profile.full_name}}</b></p>
+        	  <p>email      :    <b>{{user.email}}</b></p>
+        </div>
+	</div>
+	<br>
+
+  <!-- end of Profile View -->
+
+  <!-- start of rest of the page page -->
+
+	<div>
+		<ul class="nav nav-tabs nav_bg text-white" id="myTab" role="tablist">
+ 			 <li class="nav-item" role="presentation">
+   				 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#Projects" role="tab" aria-controls="home" aria-selected="true">Projects</a>
+ 			 </li>
+ 			 <li class="nav-item" role="presentation">
+  			 	 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Articles" role="tab" aria-controls="profile" aria-selected="false">Articles</a>
+ 			 </li>
+ 			 <li class="nav-item" role="presentation">
+  				  <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Discussion_room" role="tab" aria-controls="contact" aria-selected="false">Discussion Room</a>
+ 			 </li>
+		</ul>
+    
+
+
+    <!-- start of tabbed nav here -->
+
+	<div class="tab-content" id="myTabContent">
+
+    <!--start of projects tab here -->
+  		<div class="tab-pane fade show active" id="Projects" role="tabpanel" aria-labelledby="home-tab">
+        <div class="row no-gutters">
+        <div class="col-6 col-md-4">
+
+          <div class="card bg-dark" style="width: 18rem;">
+             <div class="card-header black_bg text-white">
+              Published
+             </div>
+             <ul class="list-group list-group-flush">
+              {% if projects == 'none' %}
+                <li class="list-group-item bg-dark shadow-style text-white">you haven't yet published any Projects...</li>
+                
+               {% else %}
+                {% for obj in projects %}
+                
+                 <a href="#" data-toggle="modal" data-target="#{{obj.slug}}"> <li class="list-group-item bg-dark shadow-style text-white">{{obj.title}} </li> </a>
+                  {% include 'includes/model1.html' %}
+               {% endfor %}
+               
+               {% endif %}
+             </ul>
+            </div>
+          </div>
+
+          <!-- start of section for form here  -->
+          <div class="col-sm-6 col-md-8">
+          <h3 class="shadow-style"> New project form</h3>
+
+         <!-- start of project form here -->
+            <form class="shadow-style" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              {% if p_form.non_field_errors %}
+              <div class="alert alert-danger" role="alert">
+                  {% for error in p_form.non_field_errors %}
+                  <p{% if forloop.last %} class="mb-0"{% endif %}>{{ error }}</p>
+                  {% endfor %}
+             </div>
+              {% endif %}
+
+              {% for field in p_form %}
+              <div class="form-group">
+              {{ field.label_tag }}
+                {% render_field field class=field|input_class %}
+                  {% for error in field.errors %}
+                  <div class="invalid-feedback">
+                   {{ error }}
+                </div>
+                {% endfor %}
+                {% if field.help_text %}
+                 <small class="form-text text-muted">
+                {{ field.help_text|safe }}
+                </small>
+                {% endif %}
+                </div>
+              {% endfor %}
+              {% if editing %}
+              <button type="submit" class="btn btn-secondary">Update</button><br>
+              {% else %}
+              <button type="submit" class="btn btn-secondary">publish</button><br>
+              {% endif %}
+              </form><br>
+          
+            </div>
+          </div>
+
+          <!-- end of the section for project form here -->
+        </div>
+
+        <!-- end of projects tab here -->
+
+        <!-- start of articles tab here -->
+  		<div class="tab-pane fade" id="Articles" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="row no-gutters">
+        <div class="col-6 col-md-4">
+        <div class="card bg-dark" style="width: 18rem;">
+             <div class="card-header black_bg text-white">
+              Published
+             </div>
+             <ul class="list-group list-group-flush">
+              {% if articles == 'none' %}
+                <li class="list-group-item bg-dark shadow-style text-white">You haven't yet published any Articles</li>
+                
+               {% else %}
+                {% for obj in articles %}
+                 <a href="#" data-toggle="modal" data-target="#{{obj.slug}}"> <li class="list-group-item bg-dark shadow-style text-white">{{obj.title}} </li> </a>
+                 {% include 'includes/model.html' %} 
+               {% endfor %}
+                
+                {% endif %}
+             </ul>
+            </div>
+          </div>
+            
+             <div class="col-sm-6 col-md-8">
+           <h3 class="shadow-style"> New article form </h3>
+
+           <!-- start of article form here -->
+            <form class="shadow-style" method="POST">
+              {% csrf_token %}
+              {% if a_form.non_field_errors %}
+             <div class="alert alert-danger" role="alert">
+            {% for error in a_form.non_field_errors %}
+           <p{% if forloop.last %} class="mb-0"{% endif %}>{{ error }}</p>
+             {% endfor %}
+           </div>
+            {% endif %}
+
+            {% for field in a_form %}
+             <div class="form-group">
+              {{ field.label_tag }}
+             {% render_field field class=field|input_class %}
+             {% for error in field.errors %}
+            <div class="invalid-feedback">
+             {{ error }}
+             </div>
+              {% endfor %}
+              {% if field.help_text %}
+              <small class="form-text text-muted">
+             {{ field.help_text|safe }}
+            </small>
+            {% endif %}
+             </div>
+            {% endfor %}
+            {% if editing %}
+              <button type="submit" class="btn btn-secondary">Update</button><br>
+            {% else %}
+              <button type="submit" class="btn btn-secondary">publish</button><br>
+            {% endif %}
+            </form>
+
+            <!-- end of the article form here -->
+            <br>
+          </div>
+        </div>
+          
+          <!-- end of the section for form here -->       
+  		</div>
+
+      <!-- end of artcles tab here  -->
+
+      <!-- start of discussion room tab here -->
+  		<div class="tab-pane fade" id="Discussion_room" role="tabpanel" aria-labelledby="contact-tab">
+  			<h3>Discussion room</h3><p>(Still in developing state....)</p>
+          <div class="container w-75" style="height: 450px; overflow-y: scroll;">
+            {% for m in messages %}
+              <div class="card">
+                 <div class="card-body">
+                  <p>messeges here</p>
+                  </div>
+              </div>
+            {% endfor %}
+          </div>
+  		</div>
+      <!-- end of discussion tab here  -->
+
+      
+
+  </div>
+  <!-- end of tabbed nav here -->
+<script type="text/javascript">
+        $(function() {
+        $('a[data-toggle="tab"]').on('click', function(e) {
+                          window.localStorage.setItem('activeTab', $(e.target).attr('href'));
+                    });
+        var activeTab = window.localStorage.getItem('activeTab');
+        if (activeTab) {
+                $('#myTab a[href="' + activeTab + '"]').tab('show');
+                window.localStorage.removeItem("activeTab");
+              }
+          });
+
+      </script>
+  
+	</div>
+
+  
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'blog/base.html' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	
+	{% block content%}
+
+	{% include 'includes/navbar.html' %}
+
+	<br>
+	<div class="container-fluid">
+		<div>
+			<p> Saiyans is a startup framed by a young team of Computer Science graduates with an aspiration of providing a platform for the students graduated from not so reputated colleges. We respect passion, those who believe they can break the restricting chains of conviction are welcomed to join. And also those who are in need of any service are requested to contact us </p>
+		</div>
+		<h4 class="bg-dark text-white">Our Previous Projects</h4>
+		<div class="container-fluid">
+			<!-- <div class="card-deck"> -->
+				<div class="card-columns">
+
+					{% if projects == 'none'%}
+						<p>No projects yet to display</p>
+					{% else %}	
+			{% for p in projects%}
+		
+ 			 <!-- <div class="col-sm-auto"> -->
+    			<div class="card black_bg text-white shadow-style">
+    				<img src="{{p.ttl_img.url}}" class="card-img-top card-img" alt="...">
+      				<div class="card-body">
+        				<h5 class="card-title">{{p.title}}</h5>
+        				<p class="card-text">{{p.created_on}}</p>
+        				<p class="card-text">{{p.content|truncatechars:50}}</p>
+        				<h6 class="card-title">Creator : {{p.author}}</h6>
+        				<a href="{% url 'project' slug=p.slug %}" class="btn-secondary stretched-link">Read</a>
+      				</div>
+    			</div>
+  			<!-- </div> -->
+  	
+		{% endfor %}
+		{% endif %}
+		</div>
+		<!-- </div> -->
+	</div>	
+	<div class="container-fluid black_bg shadow-style">
+	<div class="container w-50 mx-auto pt-10">
+            <h4 class="black_bg text-white" id="contactus">Contact Us</h4>
+            <form id = 'subscribe_form' method="POST">{% csrf_token %}
+                {% include 'includes/form.html' %}
+                <button type="submit" class="btn btn-secondary">Submit</button><br>
+                <small>we will contact you.....</small>                   
+            </form>
+            
+        </div>
+        </div>
+     </div>
+
+	{% endblock %}
+	
+
+	{% block js %}
+
+
+{% endblock %}
+</body>
+</html>
+

@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+	{% include 'includes/navbar.html' %}
+
+	{% for a in articles %}
+  <div class="container-fluid">
+	<div class="card shadow-style bg-secondary text-white" >
+  		<div class="card-body shadow-style bg-dark text-center">
+    		<h5 class="card-title">{{a.title}}</h5>
+    		<p class="card-text">{{a.created_on}}</p>
+    		<h6 class="card-title">author : {{a.author}}</h6>
+    		<p class="card-text">{{a.content|truncatechars:200}}</p>
+    		<a href="{% url 'read_article' slug=a.slug %}" class="btn btn-secondary stretched-link">read</a>
+  		</div>
+	</div>
+  </div>
+	{% endfor %}
+{% endblock %}

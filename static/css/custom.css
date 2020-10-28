@@ -1,0 +1,26 @@
+.black_bg{
+	background-color: #000000;
+}
+
+.shadow-style{
+	box-shadow: 0 5px 10px #101010;
+	padding: 10px;
+	border-radius: 10px;
+	
+}
+
+.img-style{
+	box-shadow: 0 5px 10px #101010;
+	padding-top: 10px;
+	border-radius: 10px;
+}
+
+.pro-img-style{
+	border-radius: 500px;
+	box-shadow: 0 5px 10px #101010; 
+}
+
+.card-img{
+	max-height: 300px
+}
+

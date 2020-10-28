@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+{% include 'includes/team_nav_empty.html' %}
+	<br>
+	<br>
+	<div class="container shadow-style">
+		<h3>{{msg}} {{obj.title}}</h3>
+		<a href="{% url 'profile' %}" class="btn btn-block btn-secondary">Go to Team page</a>
+		
+	</div>
+{% endblock %}

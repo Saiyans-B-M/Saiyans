@@ -1,0 +1,41 @@
+{% extends 'blog/base.html'%}
+
+{% block content %}
+
+	{% include 'includes/navbar.html' %}
+	
+	<div class="container-fluid w-75">
+	
+	<img src="{{projects.ttl_img.url}}" class="img-style w-25" alt="Responsive image">
+	
+	<h2>{{projects.title}}</h2>
+	<br>
+	
+	<div class="card bg-dark">
+ 	 <h5 class="card-header black_bg">Content:</h5>
+  	<div class="card-body shadow-style bg-dark">
+  	  <p class="card-text text-justify text-break">{{projects.content|linebreaks}}</p>
+  	</div>
+	</div>
+	<br>
+	<br>
+	<div class="card bg-dark">
+ 	 <h5 class="card-header black_bg">Functionality:</h5>
+  	<div class="card-body shadow-style bg-dark">
+  	  <p class="card-text text-justify text-break">{{projects.Functionality|linebreaks}}</p>
+  	</div>
+	</div>
+	<br>
+	<br>
+	<div class="card bg-dark">
+ 	 <h5 class="card-header black_bg">Personal Remarks of Developers:</h5>
+  	<div class="card-body shadow-style bg-dark">
+  	  <p class="card-text text-justify text-break">{{projects.remarks|linebreaks}}</p>
+  	</div>
+	</div>
+	</div>
+
+	<br>
+	
+
+{% endblock %}

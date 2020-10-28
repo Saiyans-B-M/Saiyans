@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+	{% include 'includes/navbar.html' %}
+
+ <!--  <div class="container"> -->
+	<div class="card bg-dark">
+  		<h3 class="card-header shadow-style text-center">{{article.title}}</h5>
+  		<div class="card-body">
+        <div class="shadow-style">
+   			 <h5 class="card-title">author : {{article.author}}</h5>
+   			 <p class="card-text">posted on : {{article.created_on}}</p><br>
+         
+         <h5>Content:</h5><br>
+    		<p class="card-text">{{article.content|linebreaks}}</p>
+  			</div>
+  		</div>
+	</div>
+  <!-- </div> -->
+{% endblock %}
